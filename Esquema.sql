@@ -1,0 +1,16 @@
+CREATE TABLE Oficina(
+
+oficina_id VARCHAR(50) PRIMARY KEY,
+endereço VARCHAR(50) NOT NULL
+nome_oficina VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE Clientes(
+
+cpf INT PRIMARY KEY,
+nome VARCHAR(50) NOT NULL
+
+
+
+);
