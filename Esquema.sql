@@ -5,18 +5,19 @@ CREATE TABLE Carro (
     Placa_carro VARCHAR(10) PRIMARY KEY,
     Modelo VARCHAR(50) NOT NULL,
     Cor VARCHAR(50) NOT NULL,
-    Ano YEAR,
+    Ano YEAR, -- Usando YEAR para o ano
     Marca VARCHAR(50) NOT NULL,
-    Valor_diaria REAL
+    Valor_diaria DECIMAL(10, 2) -- Usando DECIMAL para valor monetário
 );
 
 CREATE TABLE Oficina(
     Oficina_id VARCHAR(50) PRIMARY KEY,
-    endereço VARCHAR(50) NOT NULL
-    nome_oficina VARCHAR(50) NOT NULL
-    Oficina_id INT PRIMARY KEY,
-    Endereço VARCHAR(50) NOT NULL,
-    Nome_oficina VARCHAR(50) NOT NULL
+    nome_oficina VARCHAR(50) NOT NULL,
+    Rua VARCHAR(50),
+    Numero_casa INT,
+    Complemento VARCHAR(50),
+    Cep INT,
+    Telefone INT,
 );
 
 CREATE TABLE Clientes(
@@ -44,9 +45,9 @@ CREATE TABLE Vistoria(
 );
 
 CREATE TABLE Emprestimos(
-    Emprestimo_id INT PRIMARY KEY, 
+    Emprestimos_id INT PRIMARY KEY, 
     Cpf VARCHAR(50),
-    Placa_carro VARCHAR(50),
+    Placa_carro VARCHAR(10),
     Data_emprestimo DATE,
     Data_devolucao DATE,
     FOREIGN KEY Cpf REFERENCES Clientes(Cpf),
