@@ -18,10 +18,15 @@ nome_oficina VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Clientes(
-
-cpf INT PRIMARY KEY,
-nome VARCHAR(50) NOT NULL
-
+    Cpf VARCHAR(50) PRIMARY KEY,
+    Nome VARCHAR(50) NOT NULL,
+    Cnh INT,
+    Rua VARCHAR(50),
+    Numero_casa INT,
+    Complemento VARCHAR(50),
+    Cep INT,
+    Telefone INT,
+    Email VARCHAR(50)
 );
 
 CREATE TABLE Vistoria(
@@ -46,17 +51,6 @@ FROM Emprestimos,Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 
 CREATE VIEW Carros_disponiveis AS 
 SELECT * FROM Carro WHERE Carro.Placa_carro NOT IN (SELECT Emprestimos.Placa_carro FROM Emprestimos WHERE Emprestimos.data_fim IS NULL);
-
-    Cpf VARCHAR(50) PRIMARY KEY,
-    Nome VARCHAR(50) NOT NULL,
-    Cnh INT,
-    Rua VARCHAR(50),
-    Numero_casa INT,
-    Complemento VARCHAR(50),
-    Cep INT,
-    Telefone INT,
-    Email VARCHAR(50)
-);
 
 CREATE TABLE Emprestimos(
     Emprestimo_id INT PRIMARY KEY, 
