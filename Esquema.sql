@@ -1,3 +1,6 @@
+CREATE DATABASE MaJeDu_Motors;
+USE MaJeDu_Motors;
+
 CREATE TABLE Carro (
     Placa_carro VARCHAR(10) PRIMARY KEY,
     Modelo VARCHAR(50) NOT NULL,
