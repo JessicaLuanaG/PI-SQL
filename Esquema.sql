@@ -7,7 +7,7 @@ CREATE TABLE Carro (
     Cor VARCHAR(50) NOT NULL,
     Ano YEAR,
     Marca VARCHAR(50) NOT NULL,
-    Valor_diaria REAL
+    Valor_diaria DECIMAL(10,2)
 );
 
 CREATE TABLE Oficina(
