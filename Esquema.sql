@@ -8,10 +8,9 @@ CREATE TABLE Carro (
 );
 
 CREATE TABLE Oficina(
-
-Oficina_id VARCHAR(50) PRIMARY KEY,
-endereço VARCHAR(50) NOT NULL
-nome_oficina VARCHAR(50) NOT NULL
+    Oficina_id VARCHAR(50) PRIMARY KEY,
+    endereço VARCHAR(50) NOT NULL
+    nome_oficina VARCHAR(50) NOT NULL
     Oficina_id INT PRIMARY KEY,
     Endereço VARCHAR(50) NOT NULL,
     Nome_oficina VARCHAR(50) NOT NULL
@@ -39,7 +38,17 @@ CREATE TABLE Vistoria(
     Valor_vistoria REAL,
     FOREIGN KEY Placa_carro REFERENCES Carro(Placa_carro),
     FOREIGN KEY Oficina_id REFERENCES Oficina(Oficina_id)
-)
+);
+
+CREATE TABLE Emprestimos(
+    Emprestimo_id INT PRIMARY KEY, 
+    Cpf VARCHAR(50),
+    Placa_carro VARCHAR(50),
+    Data_emprestimo DATE,
+    Data_devolucao DATE,
+    FOREIGN KEY Cpf REFERENCES Clientes(Cpf),
+    FOREIGN KEY Placa_carro REFERENCES Carro(Placa_carro)
+);
 
 CREATE VIEW Valor_total_do_emprestimo AS 
 SELECT Emprestimos.emprestimo_id, DATEDIFF(Emprestimos.data_inicio,Emprestimos.data_fim) * Carro.Valor_diaria AS Valor_total 
@@ -52,12 +61,3 @@ FROM Emprestimos,Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 CREATE VIEW Carros_disponiveis AS 
 SELECT * FROM Carro WHERE Carro.Placa_carro NOT IN (SELECT Emprestimos.Placa_carro FROM Emprestimos WHERE Emprestimos.data_fim IS NULL);
 
-CREATE TABLE Emprestimos(
-    Emprestimo_id INT PRIMARY KEY, 
-    Cpf VARCHAR(50),
-    Placa_carro VARCHAR(50),
-    Data_emprestimo DATE,
-    Data_devolucao DATE,
-    FOREIGN KEY Cpf REFERENCES Clientes(Cpf),
-    FOREIGN KEY Placa_carro REFERENCES Carro(Placa_carro)
-);
