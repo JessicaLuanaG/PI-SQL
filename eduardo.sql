@@ -24,12 +24,12 @@ BEGIN
     -- Encontre a última data de devolução para o carro
     SELECT MAX(data_devolucao) INTO last_devolution
     FROM emprestimos
-    WHERE id_carro = NEW.id_carro;
+    WHERE Placa_carro = NEW.Placa_carro;
 
     -- Encontre a última vistoria após a última devolução
     SELECT MAX(data_vistoria) INTO last_inspection
     FROM vistorias
-    WHERE id_carro = NEW.id_carro
+    WHERE Placa_carro = NEW.Placa_carro
       AND data_vistoria > last_devolution;
 
     -- Verifique se a última vistoria é depois da última devolução
