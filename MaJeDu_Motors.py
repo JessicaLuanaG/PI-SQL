@@ -42,6 +42,14 @@ def add_car(placa_carro, modelo, cor, ano, marca, valor_diaria):
     params = (placa_carro, modelo, cor, ano, marca, valor_diaria)
     execute_query(query, params)
 
+#Listar todos os carros
+def list_all_cars():
+    query = "SELECT * FROM Carro"
+    cursor = execute_query(query)
+    if cursor:
+        for (placa_carro, modelo, cor, ano, marca, valor_diaria) in cursor:
+            print(f"Placa: {placa_carro}, Modelo: {modelo}, Cor: {cor}, Ano: {ano}, Marca: {marca}, Valor Diária: {valor_diaria}")
+
 def main():
     while True:
         print("1. Adicionar Carro")
