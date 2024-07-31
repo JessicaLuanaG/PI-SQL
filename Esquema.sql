@@ -88,3 +88,39 @@ INSERT INTO Vistoria (Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_res
 ('LMN9012', '2024-07-20', FALSE, 1, 'Marcos Pereira', 180.00),
 ('QRS3456', '2024-07-25', TRUE, 3, 'Lucia Santos', 300.00),
 ('TUV7890', '2024-07-30', FALSE, 2, 'João Oliveira', 275.00);
+
+INSERT INTO clientes (Cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)
+VALUES 
+('12345678900', 'João Silva', 123456, 'Rua A', 123, 'Apto 101', 12345678, 912345678, 'joao.silva@email.com'),
+
+('23456789012', 'Maria Oliveira', 234567, 'Rua B', 456, NULL, 23456789, 923456789, 'maria.oliveira@email.com'),
+
+('34567890123', 'Carlos Santos', 345678, 'Rua C', 789, 'Casa 5', 34567890, 934567890, 'carlos.santos@email.com'),
+
+('45678901234', 'Ana Costa', 456789, 'Rua D', 101, 'Casa 2', 45678901, 945678901, 'ana.costa@email.com'),
+
+('56789012345', 'Roberto Lima', 567890, 'Rua E', 202, 'Apto 303', 56789012, 956789012, 'roberto.lima@email.com');
+
+INSERT INTO oficina (Oficina_id, nome_oficina, Rua, Numero_casa, Complemento, Cep, Telefone)
+VALUES 
+(1, 'Oficina AutoMec', 'Avenida Principal', 100, 'Sala 201', 12345678, 111223344),
+
+(2, 'Oficina Rápida', 'Rua das Flores', 45, NULL, 23456789, 122334455),
+
+(3, 'Oficina Car Service', 'Rua da Paz', 789, 'Galpão 3', 34567890, 133445566),
+
+(4, 'Oficina Master', 'Rua dos Trabalhadores', 10, 'Próximo ao Mercado', 45678901, 144556677),
+
+(5, 'Oficina Premium', 'Avenida das Nações', 202, NULL, 56789012, 155667788);
+
+INSERT INTO emprestimos (Emprestimo_id, Cpf, Placa_carro, Data_emprestimo, Data_devolucao)
+VALUES 
+(1, '12345678900', 'ABC1234', '2024-07-01', '2024-07-10'),
+
+(2, '23456789012', 'XYZ5678', 'DEF5678', '2024-07-05', '2024-07-12'),
+
+(3, '34567890123', 'LMN9012', 'GHI9012', '2024-07-10', '2024-07-15'),
+
+(4, '45678901234', 'JKL3456', 'JKL3456', '2024-07-15', '2024-07-20'),
+
+(5, '56789012345', 'MNO7890', 'MNO7890', '2024-07-20', '2024-07-25');
