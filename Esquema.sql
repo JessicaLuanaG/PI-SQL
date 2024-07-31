@@ -74,7 +74,8 @@ FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 CREATE VIEW Carros_disponiveis AS 
 SELECT * FROM Carro WHERE Carro.Placa_carro NOT IN (SELECT Emprestimos.Placa_carro FROM Emprestimos WHERE Emprestimos.Data_devolucao IS NULL);
 
-INSERT INTO Carro (Placa_carro, Modelo, Cor, Ano, Marca, Valor_diaria) VALUES
+INSERT INTO Carro (Placa_carro, Modelo, Cor, Ano, Marca, Valor_diaria) 
+VALUES
 ('ABC1234', 'Fusca', 'Azul', 1978, 'Volkswagen', 150.00),
 
 ('XYZ5678', 'Civic', 'Preto', 2020, 'Honda', 300.00),
@@ -110,7 +111,8 @@ VALUES
 
 (5, 'Oficina Premium', 'Avenida das Nações', 202, NULL, 56789012, 155667788);
 
-INSERT INTO Vistoria (Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria) VALUES
+INSERT INTO Vistoria (Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria) 
+VALUES
 ('ABC1234', '2024-06-15', 0, 1, 'Carlos Silva', 200.00),
 
 ('XYZ5678', '2024-07-01', 1, 2, 'Ana Costa', 350.00),
