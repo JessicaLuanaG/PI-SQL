@@ -58,18 +58,19 @@ CREATE TABLE Emprestimos(
     Cpf VARCHAR(50),
     Placa_carro VARCHAR(10),
     Data_emprestimo DATE,
+    Data_programada_devolucao DATE,
     Data_devolucao DATE,
     FOREIGN KEY (Cpf) REFERENCES Clientes(Cpf),
     FOREIGN KEY (Placa_carro) REFERENCES Carro(Placa_carro)
 );
 
 CREATE VIEW Valor_total_do_emprestimo AS 
-SELECT Emprestimos.Emprestimo_id, ABS(DATEDIFF(Emprestimos.Data_emprestimo, Emprestimos.Data_devolucao) * Carro.Valor_diaria) AS Valor_total 
+SELECT Emprestimos.Emprestimo_id, ABS(DATEDIFF(Emprestimos.Data_emprestimo, Emprestimos.Data_programada_devolucao) * Carro.Valor_diaria) AS Valor_total 
 FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 
 CREATE VIEW Multas_carros AS 
-SELECT ABS(DATEDIFF(Emprestimos.Data_devolucao, CURDATE()) * Carro.Valor_diaria * 2) 
-FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
+SELECT emprestimos.cpf,ABS(DATEDIFF(Emprestimos.Data_programada_devolucao, emprestimos.Data_devolucao) * Carro.Valor_diaria * 2) 
+FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro AND emprestimos.Data_devolucao > emprestimos.Data_programada_devolucao;
 
 CREATE VIEW Carros_disponiveis AS 
 SELECT * FROM Carro WHERE Carro.Placa_carro NOT IN (SELECT Emprestimos.Placa_carro FROM Emprestimos WHERE Emprestimos.Data_devolucao IS NULL);
@@ -123,14 +124,14 @@ VALUES
 
 ('TUV7890', '2024-07-28', 0, 2, 'João Oliveira', 275.00);
 
-INSERT INTO emprestimos (Emprestimo_id, Cpf, Placa_carro, Data_emprestimo, Data_devolucao)
+INSERT INTO emprestimos (Emprestimo_id, Cpf, Placa_carro, Data_emprestimo,Data_programada_devolucao, Data_devolucao)
 VALUES 
-(1, '12345678900', 'ABC1234', '2024-07-01', NULL),
+(1, '12345678900', 'ABC1234', '2024-05-01' , '2024-07-01', NULL),
 
-(2, '23456789012', 'XYZ5678', '2024-07-05', '2024-07-12'),
+(2, '23456789012', 'XYZ5678', '2024-07-05', '2024-07-12', '2024-07-12'),
 
-(3, '34567890123', 'LMN9012',  '2024-07-10', '2024-07-15'),
+(3, '34567890123', 'LMN9012',  '2024-07-10', '2024-07-15', NULL),
 
-(4, '45678901234', 'QRS3456', '2024-07-15', '2024-07-20'),
+(4, '45678901234', 'QRS3456', '2024-07-15', '2024-07-20', '2024-07-30'),
 
-(5, '56789012345', 'TUV7890', '2024-07-20', '2024-07-25');
+(5, '56789012345', 'TUV7890', '2024-07-20', '2024-07-25', '2024-07-24');
