@@ -74,3 +74,4 @@ FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 
 CREATE VIEW Carros_disponiveis AS 
 SELECT * FROM Carro WHERE Carro.Placa_carro NOT IN (SELECT Emprestimos.Placa_carro FROM Emprestimos WHERE Emprestimos.Data_devolucao IS NULL);
+
