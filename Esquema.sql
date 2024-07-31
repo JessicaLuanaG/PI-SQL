@@ -4,7 +4,6 @@ USE MaJeDu_Motors;
 DROP VIEW IF EXISTS Valor_total_do_emprestimo;
 DROP VIEW IF EXISTS Multas_carros;
 DROP VIEW IF EXISTS Carros_disponiveis;
-
 DROP TABLE IF EXISTS Vistoria;
 DROP TABLE IF EXISTS Emprestimos;
 DROP TABLE IF EXISTS Clientes;
@@ -48,8 +47,8 @@ CREATE TABLE Vistoria(
     Data_Vistoria DATE,
     Sinistro BOOLEAN,
     Oficina_id INT,
-    Nome_responsavel VARCHAR(50),
-    Valor_vistoria REAL,
+    Nome_responsavel VARCHAR(100),
+    Valor_vistoria DECIMAL(10, 2),
     FOREIGN KEY (Placa_carro) REFERENCES Carro(Placa_carro),
     FOREIGN KEY (Oficina_id) REFERENCES Oficina(Oficina_id)
 );
@@ -65,11 +64,11 @@ CREATE TABLE Emprestimos(
 );
 
 CREATE VIEW Valor_total_do_emprestimo AS 
-SELECT Emprestimos.Emprestimo_id, DATEDIFF(Emprestimos.Data_emprestimo, Emprestimos.Data_devolucao) * Carro.Valor_diaria AS Valor_total 
+SELECT Emprestimos.Emprestimo_id, ABS(DATEDIFF(Emprestimos.Data_emprestimo, Emprestimos.Data_devolucao) * Carro.Valor_diaria) AS Valor_total 
 FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 
 CREATE VIEW Multas_carros AS 
-SELECT DATEDIFF(Emprestimos.Data_devolucao, CURDATE()) * Carro.Valor_diaria * 2 
+SELECT ABS(DATEDIFF(Emprestimos.Data_devolucao, CURDATE()) * Carro.Valor_diaria * 2) 
 FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 
 CREATE VIEW Carros_disponiveis AS 
@@ -77,17 +76,15 @@ SELECT * FROM Carro WHERE Carro.Placa_carro NOT IN (SELECT Emprestimos.Placa_car
 
 INSERT INTO Carro (Placa_carro, Modelo, Cor, Ano, Marca, Valor_diaria) VALUES
 ('ABC1234', 'Fusca', 'Azul', 1978, 'Volkswagen', 150.00),
+
 ('XYZ5678', 'Civic', 'Preto', 2020, 'Honda', 300.00),
+
 ('LMN9012', 'Mustang', 'Vermelho', 2022, 'Ford', 500.00),
+
 ('QRS3456', 'Corolla', 'Prata', 2018, 'Toyota', 250.00),
+
 ('TUV7890', 'i30', 'Branco', 2021, 'Hyundai', 275.00);
 
-INSERT INTO Vistoria (Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria) VALUES
-('ABC1234', '2024-06-15', 0, 1, 'Carlos Silva', 200.00),
-('XYZ5678', '2024-07-01', 1, 2, 'Ana Costa', 350.00),
-('LMN9012', '2024-07-20', 0, 1, 'Marcos Pereira', 180.00),
-('QRS3456', '2024-07-25', 1, 3, 'Lucia Santos', 300.00),
-('TUV7890', '2024-07-30', 0, 2, 'João Oliveira', 275.00);
 
 INSERT INTO clientes (Cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)
 VALUES 
@@ -113,9 +110,20 @@ VALUES
 
 (5, 'Oficina Premium', 'Avenida das Nações', 202, NULL, 56789012, 155667788);
 
+INSERT INTO Vistoria (Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria) VALUES
+('ABC1234', '2024-06-15', 0, 1, 'Carlos Silva', 200.00),
+
+('XYZ5678', '2024-07-01', 1, 2, 'Ana Costa', 350.00),
+
+('LMN9012', '2024-07-20', 0, 1, 'Marcos Pereira', 180.00),
+
+('QRS3456', '2024-07-25', 1, 3, 'Lucia Santos', 300.00),
+
+('TUV7890', '2024-07-28', 0, 2, 'João Oliveira', 275.00);
+
 INSERT INTO emprestimos (Emprestimo_id, Cpf, Placa_carro, Data_emprestimo, Data_devolucao)
 VALUES 
-(1, '12345678900', 'ABC1234', '2024-07-01', '2024-07-10'),
+(1, '12345678900', 'ABC1234', '2024-07-01', NULL),
 
 (2, '23456789012', 'XYZ5678', '2024-07-05', '2024-07-12'),
 
