@@ -83,11 +83,11 @@ INSERT INTO Carro (Placa_carro, Modelo, Cor, Ano, Marca, Valor_diaria) VALUES
 ('TUV7890', 'i30', 'Branco', 2021, 'Hyundai', 275.00);
 
 INSERT INTO Vistoria (Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria) VALUES
-('ABC1234', '2024-06-15', FALSE, 1, 'Carlos Silva', 200.00),
-('XYZ5678', '2024-07-01', TRUE, 2, 'Ana Costa', 350.00),
-('LMN9012', '2024-07-20', FALSE, 1, 'Marcos Pereira', 180.00),
-('QRS3456', '2024-07-25', TRUE, 3, 'Lucia Santos', 300.00),
-('TUV7890', '2024-07-30', FALSE, 2, 'João Oliveira', 275.00);
+('ABC1234', '2024-06-15', 0, 1, 'Carlos Silva', 200.00),
+('XYZ5678', '2024-07-01', 1, 2, 'Ana Costa', 350.00),
+('LMN9012', '2024-07-20', 0, 1, 'Marcos Pereira', 180.00),
+('QRS3456', '2024-07-25', 1, 3, 'Lucia Santos', 300.00),
+('TUV7890', '2024-07-30', 0, 2, 'João Oliveira', 275.00);
 
 INSERT INTO clientes (Cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)
 VALUES 
