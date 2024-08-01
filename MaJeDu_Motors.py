@@ -42,12 +42,14 @@ def add_car(placa_carro, modelo, cor, ano, marca, valor_diaria):
     params = (placa_carro, modelo, cor, ano, marca, valor_diaria)
     execute_query(query, params)
 
+#Criação de um cliente no banco de dados
 def add_cliente(cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email):
     query = ("INSERT INTO Clientes(Cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)"
              "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)")
     params = (cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)
     execute_query(query,params)
 
+#Criação de uma vistoria no banco de dados
 def add_vistoria(Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria):
     query = ("INSERT INTO Vistoria (Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria)" 
              "VALUES(%s, %s, %s, %s, %s, %s)")
@@ -102,6 +104,7 @@ def main():
             marca = input("Digite a marca: ")
             valor_diaria = input("Digite o valor da diária: ")
             add_car(placa_carro, modelo, cor, ano, marca, valor_diaria)
+            
         elif choice == '2': #Criar cliente
             cpf = input("Digite o cpf do cliente: ")
             Nome = input("Digite o nome do cliente: ")
@@ -113,6 +116,7 @@ def main():
             Telefone = input("Digite um numero de telefone: ")
             Email = input("Digite um e-mail: ")
             add_cliente(cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)
+            
         elif choice == '3': #Criar oficina
             pass
         elif choice == '4': #Criar vistoria
@@ -123,6 +127,7 @@ def main():
             Nome_responsavel = input("Digite o nome do responsável pela vistoria: ") 
             Valor_vistoria = input("Digite o valor da vistoria: ") 
             add_vistoria(Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria)
+            
         elif choice == '5': #Novo empréstimo
             pass
         elif choice == '6': #Nova Devolução
