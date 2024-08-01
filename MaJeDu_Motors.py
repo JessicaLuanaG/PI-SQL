@@ -27,10 +27,7 @@ def execute_query(query, params=None):
     cursor = cnx.cursor()
     try:
         cursor.execute(query, params)
-        if fetch_results:
-            return cursor.fetchall()  # Retorna todos os resultados da consulta
-        else:
-           cnx.commit()
+        cnx.commit()
         return cursor
     except mysql.connector.Error as err:
         print(f"Error: {err}")
