@@ -119,9 +119,9 @@ def main():
         print("10. Listar Empréstimos, seus valores totais, e os valores das multas associadas a eles")
         # Adicionar mais opções aqui...
         print("0. Sair")
-        choice = input("Selecione uma opção: ")
+        choice = int(input("Selecione uma opção: "))
 
-        if choice == '1': #Criar carro
+        if choice == 1: #Criar carro
             placa_carro = input("Digite a placa do carro: ")
             modelo = input("Digite o modelo: ")
             cor = input("Digite a cor: ")
@@ -130,7 +130,7 @@ def main():
             valor_diaria = input("Digite o valor da diária: ")
             add_car(placa_carro, modelo, cor, ano, marca, valor_diaria)
             
-        elif choice == '2': #Criar cliente
+        elif choice == 2: #Criar cliente
             cpf = input("Digite o cpf do cliente: ")
             Nome = input("Digite o nome do cliente: ")
             Cnh = input("Digite a Cnh: ")
@@ -142,7 +142,7 @@ def main():
             Email = input("Digite um e-mail: ")
             add_cliente(cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)
             
-        elif choice == '3': #Criar oficina
+        elif choice == 3: #Criar oficina
             nome_oficina = input("Digite o nome da oficina: ")
             Rua = input("Digite o nome da Rua: ")
             Numero_casa = input("Digite o numero da casa: ")
@@ -150,7 +150,7 @@ def main():
             Cep = input("Digite o cep: ")
             Telefone = input("Digite o telefone: ")
             add_ofi(nome_oficina, Rua, Numero_casa, Complemento, Cep, Telefone)
-        elif choice == '4': #Criar vistoria
+        elif choice == 4: #Criar vistoria
             Placa_carro = input("Digite placa do carro: ") 
             Data_Vistoria = input("Digite data de vistoria: ") 
             Sinistro = input("Digite 1 se passou ou 0 se não passou pela vistoria: ") 
@@ -159,24 +159,24 @@ def main():
             Valor_vistoria = input("Digite o valor da vistoria: ") 
             add_vistoria(Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria)
             
-        elif choice == '5': #Novo empréstimo
+        elif choice == 5: #Novo empréstimo
             Cpf = input("Digite o Cpf: ")
             Placa_carro = input("Digite a placa do carro: ")
             Data_emprestimo = input("Digite a data do emprestimo: ")
             Data_progamada_devolucao = input("Digite a data progamada da devolucao: ")
             add_emp(Cpf, Placa_carro, Data_emprestimo, Data_progamada_devolucao)
             
-        elif choice == '6': #Nova Devolução
+        elif choice == 6: #Nova Devolução
             pass
         elif choice == 7: #Listar Carros Disponíveis
             list_carros_disponiveis()
-        elif choice == '8': #Listar Todos os Carros
+        elif choice == 8: #Listar Todos os Carros
             list_all_cars()
-        elif choice == '9': #Listar Usuários
+        elif choice == 9: #Listar Usuários
             pass
-        elif choice == '10': #Listar Empréstimos, seus valores totais, e os valores das multas associadas a eles
+        elif choice == 10: #Listar Empréstimos, seus valores totais, e os valores das multas associadas a eles
             pass
-        elif choice == '0': #Sair
+        elif choice == 0: #Sair
             break
         else:
             print("Escolha inválida!")
