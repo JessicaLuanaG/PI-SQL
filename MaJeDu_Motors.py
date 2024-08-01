@@ -56,7 +56,7 @@ def add_vistoria(Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsa
     params =(Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria) 
     execute_query(query,params)
 
-#Listar todos os carros
+
 def execute_select(query, params=None):
     cnx = connect_to_db()
     if cnx is None:
@@ -80,6 +80,15 @@ def list_all_cars():
         for car in cars:
             placa_carro, modelo, cor, ano, marca, valor_diaria = car
             print(f"Placa: {placa_carro}, Modelo: {modelo}, Cor: {cor}, Ano: {ano}, Marca: {marca}, Valor Diária: {valor_diaria}")
+            
+def list_carros_disponiveis():
+    query = "SELECT * FROM Carros_disponiveis"
+    cars = execute_select(query)
+    if cars:
+        for car in cars:
+            placa_carro, modelo, cor, ano, marca, valor_diaria = car
+            print(f"Placa: {placa_carro}, Modelo: {modelo}, Cor: {cor}, Ano: {ano}, Marca: {marca}, Valor Diária: {valor_diaria}")
+            
 def main():
     while True:
         print("1. Adicionar Carro")
@@ -132,8 +141,8 @@ def main():
             pass
         elif choice == '6': #Nova Devolução
             pass
-        elif choice == '7': #Listar Carros Disponíveis
-            pass
+        elif choice == 7: #Listar Carros Disponíveis
+            list_carros_disponiveis()
         elif choice == '8': #Listar Todos os Carros
             list_all_cars()
         elif choice == '9': #Listar Usuários
