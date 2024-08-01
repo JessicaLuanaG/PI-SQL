@@ -27,7 +27,10 @@ def execute_query(query, params=None):
     cursor = cnx.cursor()
     try:
         cursor.execute(query, params)
-        cnx.commit()
+        if fetch_results:
+            return cursor.fetchall()  # Retorna todos os resultados da consulta
+        else:
+           cnx.commit()
         return cursor
     except mysql.connector.Error as err:
         print(f"Error: {err}")
@@ -81,6 +84,19 @@ def list_all_cars():
             placa_carro, modelo, cor, ano, marca, valor_diaria = car
             print(f"Placa: {placa_carro}, Modelo: {modelo}, Cor: {cor}, Ano: {ano}, Marca: {marca}, Valor Diária: {valor_diaria}")
             
+def add_ofi(nome_oficina, Rua, Numero_casa, Complemento, Cep, Telefone):
+    query = ("INSERT INTO Oficina (nome_oficina, Rua, Numero_casa, Complemento, Cep, Telefone)"
+            "VALUES (%s, %s, %s, %s, %s, %s)")
+    params =  (nome_oficina, Rua, Numero_casa, Complemento, Cep, Telefone)
+    execute_query(query, params)      
+    
+def add_emp(Cpf, Placa_carro, Data_emprestimo, Data_progamada_devolucao):
+    query = ("INSERT INTO Oficina (Emprestimo_id, Cpf, Placa_carro, Data_emprestimop, Data_progamada_devolucao)"
+            "VALUES (%s, %s, %s, %s)")
+    params = (Cpf, Placa_carro, Data_emprestimo, Data_progamada_devolucao)
+    execute_query(query, params)            
+
+            
 def list_carros_disponiveis():
     query = "SELECT * FROM Carros_disponiveis"
     cars = execute_select(query)
@@ -127,7 +143,13 @@ def main():
             add_cliente(cpf, Nome, Cnh, Rua, Numero_casa, Complemento, Cep, Telefone, Email)
             
         elif choice == '3': #Criar oficina
-            pass
+            nome_oficina = input("Digite o nome da oficina: ")
+            Rua = input("Digite o nome da Rua: ")
+            Numero_casa = input("Digite o numero da casa: ")
+            Complemento = input("Digite o Complemento: ")
+            Cep = input("Digite o cep: ")
+            Telefone = input("Digite o telefone: ")
+            add_ofi(nome_oficina, Rua, Numero_casa, Complemento, Cep, Telefone)
         elif choice == '4': #Criar vistoria
             Placa_carro = input("Digite placa do carro: ") 
             Data_Vistoria = input("Digite data de vistoria: ") 
@@ -138,7 +160,12 @@ def main():
             add_vistoria(Placa_carro, Data_Vistoria, Sinistro, Oficina_id, Nome_responsavel, Valor_vistoria)
             
         elif choice == '5': #Novo empréstimo
-            pass
+            Cpf = input("Digite o Cpf: ")
+            Placa_carro = input("Digite a placa do carro: ")
+            Data_emprestimo = input("Digite a data do emprestimo: ")
+            Data_progamada_devolucao = input("Digite a data progamada da devolucao: ")
+            add_emp(Cpf, Placa_carro, Data_emprestimo, Data_progamada_devolucao)
+            
         elif choice == '6': #Nova Devolução
             pass
         elif choice == 7: #Listar Carros Disponíveis
