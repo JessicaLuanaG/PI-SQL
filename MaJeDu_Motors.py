@@ -42,14 +42,29 @@ def add_car(placa_carro, modelo, cor, ano, marca, valor_diaria):
     params = (placa_carro, modelo, cor, ano, marca, valor_diaria)
     execute_query(query, params)
 
-#Listar todos os carros
+def execute_select(query, params=None):
+    cnx = connect_to_db()
+    if cnx is None:
+        return
+    cursor = cnx.cursor()
+    try:
+        cursor.execute(query, params)
+        results = cursor.fetchall()
+        return results
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+    finally:
+        cursor.close()
+        cnx.close()
+
+# Listar todos os carros
 def list_all_cars():
     query = "SELECT * FROM Carro"
-    cursor = execute_query(query)
-    if cursor:
-        for (placa_carro, modelo, cor, ano, marca, valor_diaria) in cursor:
+    cars = execute_select(query)
+    if cars:
+        for car in cars:
+            placa_carro, modelo, cor, ano, marca, valor_diaria = car
             print(f"Placa: {placa_carro}, Modelo: {modelo}, Cor: {cor}, Ano: {ano}, Marca: {marca}, Valor Diária: {valor_diaria}")
-
 def main():
     while True:
         print("1. Adicionar Carro")
@@ -87,7 +102,7 @@ def main():
         elif choice == '7': #Listar Carros Disponíveis
             pass
         elif choice == '8': #Listar Todos os Carros
-            pass
+            list_all_cars()
         elif choice == '9': #Listar Usuários
             pass
         elif choice == '10': #Listar Empréstimos, seus valores totais, e os valores das multas associadas a eles
