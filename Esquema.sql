@@ -69,7 +69,7 @@ SELECT Emprestimos.Emprestimo_id, ABS(DATEDIFF(Emprestimos.Data_emprestimo, Empr
 FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro;
 
 CREATE VIEW Multas_carros AS 
-SELECT emprestimos.cpf,ABS(DATEDIFF(Emprestimos.Data_programada_devolucao, emprestimos.Data_devolucao) * Carro.Valor_diaria * 2) 
+SELECT emprestimos.cpf,ABS(DATEDIFF(Emprestimos.Data_programada_devolucao, emprestimos.Data_devolucao) * Carro.Valor_diaria * 2) AS valor_multa
 FROM Emprestimos, Carro WHERE Emprestimos.Placa_carro = Carro.Placa_carro AND emprestimos.Data_devolucao > emprestimos.Data_programada_devolucao;
 
 CREATE VIEW Carros_disponiveis AS 
