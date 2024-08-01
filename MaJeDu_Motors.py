@@ -120,10 +120,7 @@ def list_all_cliente():
            
 # Listar Empréstimos, seus valores totais, e os valores das multas associadas a eles 10
 def list_all_emp_val_mul():
-    query = "SELECT Emprestimos.Emprestimo_id, Clientes.Nome AS Nome_Cliente, Emprestimos.Placa_carro, Carro.Modelo, Emprestimos.Data_emprestimo,"
-    "Emprestimos.Data_programada_devolucao, Emprestimos.Data_devolucao, Valor_total_do_emprestimo.Valor_total, IFNULL(Multas_carros.valor_multa, 0) AS Valor_multa"
-    "FROM Emprestimos LEFT JOIN Valor_total_do_emprestimo ON Emprestimos.Emprestimo_id = Valor_total_do_emprestimo.Emprestimo_id LEFT JOIN "
-    "Multas_carros ON Emprestimos.Cpf = Multas_carros.Cpf LEFT JOIN Clientes ON Emprestimos.Cpf = Clientes.Cpf LEFT JOIN Carro ON Emprestimos.Placa_carro = Carro.Placa_carro;"
+    query = "SELECT Emprestimos.Emprestimo_id, Clientes.Nome AS Nome_Cliente, Emprestimos.Placa_carro, Carro.Modelo, Emprestimos.Data_emprestimo, Emprestimos.Data_programada_devolucao, Emprestimos.Data_devolucao, Valor_total_do_emprestimo.Valor_total, IFNULL(Multas_carros.valor_multa, 0) AS Valor_multa FROM Emprestimos LEFT JOIN Valor_total_do_emprestimo ON Emprestimos.Emprestimo_id = Valor_total_do_emprestimo.Emprestimo_id LEFT JOIN Multas_carros ON Emprestimos.Cpf = Multas_carros.Cpf LEFT JOIN Clientes ON Emprestimos.Cpf = Clientes.Cpf LEFT JOIN Carro ON Emprestimos.Placa_carro = Carro.Placa_carro;"
     emp_val_mul = execute_select(query)
     if emp_val_mul:
         for emp_val_muls in emp_val_mul:
